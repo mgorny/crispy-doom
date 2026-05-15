@@ -1012,6 +1012,7 @@ void G_DoLoadLevel (void)
 static void SetJoyButtons(unsigned int buttons_mask)
 {
     int i;
+    player_t *const player = &players[consoleplayer];
 
     for (i=0; i<MAX_JOY_BUTTONS; ++i)
     {
@@ -1030,6 +1031,16 @@ static void SetJoyButtons(unsigned int buttons_mask)
             else if (i == joybnextweapon)
             {
                 next_weapon = 1;
+            }
+            else if (i == joybinvleft)
+            {
+                if (player->inventorycursor > 0)
+                    player->inventorycursor--;
+            }
+            else if (i == joybinvright)
+            {
+                if (player->inventorycursor < player->numinventory - 1)
+                    player->inventorycursor++;
             }
         }
 
